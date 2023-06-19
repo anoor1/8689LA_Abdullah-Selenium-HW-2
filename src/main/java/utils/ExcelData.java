@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class ExcelData {
 
+    public static Object readString;
     private final String filePath;
     private XSSFWorkbook workbook = null;
     private Sheet sheet = null;
@@ -27,6 +28,9 @@ public class ExcelData {
 
     public ExcelData(String filePath) {
         this.filePath = filePath;
+    }
+
+    public static void readString() {
     }
 
     // region Readers

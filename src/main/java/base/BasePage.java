@@ -7,14 +7,12 @@ import config.Config;
 import listeners.DriverEventListener;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverListener;
 import org.openqa.selenium.support.ui.*;
 import org.testng.ITestContext;
@@ -157,7 +155,7 @@ public class BasePage {
         element.sendKeys(keys);
     }
 
-    public void clearSendKeysToElement(WebElement element, String keys) {
+    public void clearSendKeysToElement(WebElement element, String searchTerm) {
         webDriverWait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
         element.sendKeys(keys);
