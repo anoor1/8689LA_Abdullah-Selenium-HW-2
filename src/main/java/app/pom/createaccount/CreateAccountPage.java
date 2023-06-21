@@ -1,4 +1,4 @@
-package app.pom.homepage;
+package app.pom.createaccount;
 
 import base.BasePage;
 import org.openqa.selenium.WebElement;
@@ -55,6 +55,19 @@ public class CreateAccountPage extends BasePage {
     	sendKeysToElement(email, "abcdtest1@gmail.com");
     	sendKeysToElement(password, "QqwertyQ@123");
     	sendKeysToElement(passwordconfirmation, "QqwertyQ@123");
+    	clickOnElement(createaccount);
+    	
+    }
+    
+    public void createAccountwithParam(String fName,String lName,String emailId,String pass)
+    {
+    	clickOnElement(createaccountLink);
+    	sendKeysToElement(firstname, fName);
+    	sendKeysToElement(lastname, lName);
+    	clickOnElement(signupnewsletter);
+    	sendKeysToElement(email, emailId);
+    	sendKeysToElement(password, pass);
+    	sendKeysToElement(passwordconfirmation, pass);
     	clickOnElement(createaccount);
     	
     }

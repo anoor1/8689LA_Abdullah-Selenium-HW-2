@@ -1,26 +1,23 @@
 package test_app;
 
-import app.pom.homepage.CreateAccountPage;
-import app.pom.homepage.Homepage;
-import app.pom.homepage.LoginPage;
-import app.pom.homepage.SearchResultPage;
 import base.BasePage;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 import utils.ExcelData;
 
-import static utils.ExcelData.readString;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import app.pom.createaccount.CreateAccountPage;
+import app.pom.homepage.Homepage;
+import app.pom.login.LoginPage;
 
 public class TestApp extends BasePage {
 
-    Homepage homepage = new Homepage();
     @Test (priority = 0, groups = {"BAT"})
     public void testNavigationToApplication() {
-
+        Homepage homepage = new Homepage();
 
         Assert.assertTrue(isElementVisible(homepage.logo));
-
-        Assert.assertTrue(isElementVisible(homepage.search_bar));
     }
     
     
@@ -45,22 +42,51 @@ public class TestApp extends BasePage {
     }
     
     
-    @Test
-    public void testDoSearch(){
-        homepage = new Homepage();
-        ExcelData.readString("testDoSearch")[0]
-        String searchTerm ="OverNight Duffle";
-       SearchResultPage searchResultPage = homepage.doSearch(searchTerm);
-
-       Assert.assertEquals(searchResultPage.textSearchTerm.getText(), searchTerm);
-
-
-
+    
+    @Test (priority = 3, groups = {"BAT"},dataProvider = "datacreateaccount")
+    public void createAccountusingDataProvider(String fName,String lName,String emailId,String pass) {
+        CreateAccountPage accountpage = new CreateAccountPage();
+        accountpage.createAccountwithParam(fName, lName, emailId, pass);
+        Assert.assertTrue(isElementVisible(accountpage.registeruservalidation));
+    }
+    
+    
+    
+    @DataProvider(name="datacreateaccount")
+    public String[][] createAccountdataProvider()
+    {
+    	
+    	String path= System.getProperty("user.dir")+"\\src\\main\\resources\\externalData\\testdata.xlsx";
+		ExcelData ex=new ExcelData(path);
+		String data[][]=ex.readStringArrays("createaccount");
+		return data;
+    	
     }
     
     
     
     
+    @Test (priority = 4, groups = {"BAT"},dataProvider = "datalogin")
+    public void loginusingDataProvider(String emailId,String password) {
+        LoginPage loginpage = new LoginPage();
+        loginpage.loginwithparam(emailId, password);
+        Homepage homepage = new Homepage();
+
+        Assert.assertTrue(isElementVisible(homepage.logo));   
+        }
+    
+    
+    
+    @DataProvider(name="datalogin")
+    public String[][] logindataProvider()
+    {
+    	
+    	String path= System.getProperty("user.dir")+"\\src\\main\\resources\\externalData\\testdata.xlsx";
+		ExcelData ex=new ExcelData(path);
+		String data[][]=ex.readStringArrays("signin");
+		return data;
+    	
+    }
     
     
     

@@ -1,4 +1,4 @@
-package app.pom.homepage;
+package app.pom.login;
 
 import base.BasePage;
 import org.openqa.selenium.WebElement;
@@ -37,6 +37,16 @@ public class LoginPage extends BasePage {
     	clickOnElement(signinheaderLink);
     	sendKeysToElement(email, "abcdtest1@gmail.com");
     	sendKeysToElement(pass, "QqwertyQ@123");
+    	clickOnElement(signin);
+    	
+    	
+    }
+    
+    public void loginwithparam(String emailid,String password)
+    {
+    	clickOnElement(signinheaderLink);
+    	sendKeysToElement(email, emailid);
+    	sendKeysToElement(pass, password);
     	clickOnElement(signin);
     	
     	
