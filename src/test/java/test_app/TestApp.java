@@ -1,17 +1,19 @@
 package test_app;
 
-import base.BasePage;
-import utils.ExcelData;
-
+import app.pom.addmodifycartpage.AddModifyCartPage;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import app.pom.createaccount.CreateAccountPage;
+import app.pom.createaccountpage.CreateAccountPage;
 import app.pom.homepage.Homepage;
-import app.pom.login.LoginPage;
+import app.pom.itemsearchpage.ItemSearchPage;
+import app.pom.loginpage.LoginPage;
+import base.BasePage;
+import utils.ExcelData;
 
 public class TestApp extends BasePage {
+
 
     @Test (priority = 0, groups = {"BAT"})
     public void testNavigationToApplication() {
@@ -90,6 +92,42 @@ public class TestApp extends BasePage {
     
     
     
+    @Test (priority = 5, groups = {"BAT"},dataProvider = "searchItems")
+    public void searchItemDataProvider(String item) {
+        ItemSearchPage page = new ItemSearchPage();
+        page.searchItem(item);
+        }
     
+    
+    
+    @DataProvider(name="searchItems")
+    public String[][] searchItemProvider()
+    {
+    	
+    	String path= System.getProperty("user.dir")+"\\src\\main\\resources\\externalData\\testdata.xlsx";
+		ExcelData ex=new ExcelData(path);
+		String data[][]=ex.readStringArrays("searchdata");
+		return data;
+    	
+    }
+
+    @Test (priority = 6, groups = {"BAT"})
+    public void addmodifyCartData() {
+        ItemSearchPage page = new ItemSearchPage();
+        page.searchItem("Duffle Bag");
+        AddModifyCartPage add=new AddModifyCartPage();
+        add.addtoCartItem();
+        add.modifyItem();
+        add.removeCartItem();
+    }
+
+    @Test (priority = 7, groups = {"BAT"})
+    public void testCategoryResult(){
+        Homepage homepage = new Homepage();
+        homepage.doFilterTo();
+        Assert.assertTrue(isElementVisible(homepage.categoryJacketResult));
+    }
+
+
 
 }

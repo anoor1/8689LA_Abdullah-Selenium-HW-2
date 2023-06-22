@@ -1,4 +1,4 @@
-package app.pom.createaccount;
+package app.pom.createaccountpage;
 
 import base.BasePage;
 import org.openqa.selenium.WebElement;
@@ -53,7 +53,7 @@ public class CreateAccountPage extends BasePage {
     	clickOnElement(signupnewsletter);
     	//Please change email id before run
     	sendKeysToElement(email, "abcdtest1@gmail.com");
-    	sendKeysToElement(password, "QqwertyQ@123");
+    	sendKeysToElement(password, "abcdtest1@gmail.com");
     	sendKeysToElement(passwordconfirmation, "QqwertyQ@123");
     	clickOnElement(createaccount);
     	
