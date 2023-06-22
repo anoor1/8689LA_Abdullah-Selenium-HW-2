@@ -1,6 +1,8 @@
 package test_app;
 
 import app.pom.addmodifycartpage.AddModifyCartPage;
+import app.pom.contactuspage.ContactUsPage;
+import net.bytebuddy.build.Plugin;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -132,7 +134,25 @@ public class TestApp extends BasePage {
     public void testSearchInvalidResult(){
         ItemSearchPage page = new ItemSearchPage();
         page.searchWrongItem("12345");
-        Assert.assertTrue((isElementVisible(page.noResultsReturned)));
+        Assert.assertTrue(isElementVisible(page.noResultsReturned));
+   }
+   @Test (priority= 9, groups = {"BAT"})
+    public void testSubscribeWithEmail(){
+        Homepage page = new Homepage();
+        String email = "Helloworld12345@yahoo.com";
+        page.subscribeWithEmail(email);
+        Assert.assertTrue(isElementVisible(page.confirmSubscriptionMessage));
+   }
+   @Test (priority = 10, groups = {"BAT"})
+    public void testContactUsSubmit(){
+       ContactUsPage page = new ContactUsPage();
+       String name = "Abdullah Noor";
+       String email = "Helloworld12345@yahoo.com";
+       String phoneNumber = "1234567890";
+       String whatOnYourMindComment = "Sami is the best teacher";
+       page.doContactUs(name, email, phoneNumber, whatOnYourMindComment);
+       Assert.assertTrue(isElementVisible(page.thankYouForContactMessage));
+
    }
 
 }

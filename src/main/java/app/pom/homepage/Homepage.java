@@ -25,6 +25,16 @@ public class Homepage extends BasePage {
     @FindBy (xpath = "//div[@class='filter-current']//li[@class='item']")
     public WebElement categoryJacketResult;
 
+    @FindBy (xpath = "//input[@id='newsletter']")
+    public WebElement emailSubscribeInput;
+
+    @FindBy (xpath = "//span[normalize-space()='Subscribe']")
+    public WebElement emailSubscribeButton;
+
+    @FindBy (xpath = "//div[@data-bind='html: $parent.prepareMessageForHtml(message.text)']")
+    public WebElement confirmSubscriptionMessage;
+
+
 
 
     public void clickWomanDropdown(){
@@ -55,6 +65,11 @@ public class Homepage extends BasePage {
 
     public Homepage(){
         PageFactory.initElements(driver, this);
+    }
+
+    public void subscribeWithEmail(String emailAddress) {
+        sendKeysToElement(emailSubscribeInput, emailAddress);
+        safeClickOnElement(emailSubscribeButton);
     }
     
    
