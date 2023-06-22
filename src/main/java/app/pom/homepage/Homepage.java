@@ -25,6 +25,8 @@ public class Homepage extends BasePage {
     @FindBy (xpath = "//div[@class='filter-current']//li[@class='item']")
     public WebElement categoryJacketResult;
 
+
+
     public void clickWomanDropdown(){
         hoverOverElement(womanDropdown);
 

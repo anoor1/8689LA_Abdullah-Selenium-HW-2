@@ -21,6 +21,9 @@ public class ItemSearchPage extends BasePage {
 	
 	@FindBy(xpath = "//span[@data-ui-id='page-title-wrapper']")
 	public WebElement searchedheadertext;
+
+	@FindBy(xpath = "//div[contains(text(),'Your search returned no results.')]")
+	public WebElement noResultsReturned;
 	
 	public void searchItem(String item)
 	{
@@ -29,6 +32,11 @@ public class ItemSearchPage extends BasePage {
 		String textactual=getTrimmedElementText(searchedheadertext);
 		String expected="Search results for: '"+item+"'";
 		Assert.assertEquals(textactual, expected);
+	}
+
+	public void searchWrongItem(String wrongItem){
+		enterAndHitEnterKeyword(searchitemtxtbox, wrongItem);
+		isElementVisible(noResultsReturned);
 	}
 	
 	

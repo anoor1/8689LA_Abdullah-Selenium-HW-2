@@ -25,7 +25,7 @@ public class TestApp extends BasePage {
     
     
     @Test (priority = 1, groups = {"BAT"})
-    public void createAccountinApplication() {
+    public void testCreateAccountInApplication() {
         CreateAccountPage accountpage = new CreateAccountPage();
         accountpage.createAccount();
         Assert.assertTrue(isElementVisible(accountpage.registeruservalidation));
@@ -34,7 +34,7 @@ public class TestApp extends BasePage {
     
     
     @Test (priority = 2, groups = {"BAT"})
-    public void login() {
+    public void testLogin() {
         LoginPage loginpage = new LoginPage();
         loginpage.login();
         Assert.assertTrue(isElementVisible(loginpage.welcompagetext));
@@ -46,7 +46,7 @@ public class TestApp extends BasePage {
     
     
     @Test (priority = 3, groups = {"BAT"},dataProvider = "datacreateaccount")
-    public void createAccountusingDataProvider(String fName,String lName,String emailId,String pass) {
+    public void testCreateAccountUsingDataProvider(String fName,String lName,String emailId,String pass) {
         CreateAccountPage accountpage = new CreateAccountPage();
         accountpage.createAccountwithParam(fName, lName, emailId, pass);
         Assert.assertTrue(isElementVisible(accountpage.registeruservalidation));
@@ -55,7 +55,7 @@ public class TestApp extends BasePage {
     
     
     @DataProvider(name="datacreateaccount")
-    public String[][] createAccountdataProvider()
+    public String[][] createAccountDataProvider()
     {
     	
     	String path= System.getProperty("user.dir")+"\\src\\main\\resources\\externalData\\testdata.xlsx";
@@ -69,7 +69,7 @@ public class TestApp extends BasePage {
     
     
     @Test (priority = 4, groups = {"BAT"},dataProvider = "datalogin")
-    public void loginusingDataProvider(String emailId,String password) {
+    public void testLoginUsingDataProvider(String emailId,String password) {
         LoginPage loginpage = new LoginPage();
         loginpage.loginwithparam(emailId, password);
         Homepage homepage = new Homepage();
@@ -80,7 +80,7 @@ public class TestApp extends BasePage {
     
     
     @DataProvider(name="datalogin")
-    public String[][] logindataProvider()
+    public String[][] loginDataProvider()
     {
     	
     	String path= System.getProperty("user.dir")+"\\src\\main\\resources\\externalData\\testdata.xlsx";
@@ -93,7 +93,7 @@ public class TestApp extends BasePage {
     
     
     @Test (priority = 5, groups = {"BAT"},dataProvider = "searchItems")
-    public void searchItemDataProvider(String item) {
+    public void testSearchItemDataProvider(String item) {
         ItemSearchPage page = new ItemSearchPage();
         page.searchItem(item);
         }
@@ -112,7 +112,7 @@ public class TestApp extends BasePage {
     }
 
     @Test (priority = 6, groups = {"BAT"})
-    public void addmodifyCartData() {
+    public void testAddModifyCartData() {
         ItemSearchPage page = new ItemSearchPage();
         page.searchItem("Duffle Bag");
         AddModifyCartPage add=new AddModifyCartPage();
@@ -128,6 +128,11 @@ public class TestApp extends BasePage {
         Assert.assertTrue(isElementVisible(homepage.categoryJacketResult));
     }
 
-
+   @Test (priority=8, groups = {"BAT"})
+    public void testSearchInvalidResult(){
+        ItemSearchPage page = new ItemSearchPage();
+        page.searchWrongItem("12345");
+        Assert.assertTrue((isElementVisible(page.noResultsReturned)));
+   }
 
 }
