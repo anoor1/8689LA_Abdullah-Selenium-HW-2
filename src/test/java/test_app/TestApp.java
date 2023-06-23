@@ -98,6 +98,9 @@ public class TestApp extends BasePage {
     public void testSearchItemDataProvider(String item) {
         ItemSearchPage page = new ItemSearchPage();
         page.searchItem(item);
+        String textactual = getTrimmedElementText(page.searchedheadertext);
+        String expected="Search results for: '"+item+"'";
+        Assert.assertEquals(textactual, expected);
 
         }
     

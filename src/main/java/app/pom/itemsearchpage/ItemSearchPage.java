@@ -30,8 +30,7 @@ public class ItemSearchPage extends BasePage {
 		
 		enterAndHitEnterKeyword(searchitemtxtbox, item);
 		String textactual = getTrimmedElementText(searchedheadertext);
-		String expected="Search results for: '"+item+"'";
-		Assert.assertEquals(textactual, expected);
+
 	}
 
 	public void searchWrongItem(String wrongItem){
