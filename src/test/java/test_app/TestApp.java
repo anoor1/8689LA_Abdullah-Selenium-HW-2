@@ -41,7 +41,6 @@ public class TestApp extends BasePage {
         loginpage.login();
         Assert.assertTrue(isElementVisible(loginpage.welcompagetext));
         Homepage homepage = new Homepage();
-
         Assert.assertTrue(isElementVisible(homepage.logo));
     }
     
@@ -51,6 +50,7 @@ public class TestApp extends BasePage {
     public void testCreateAccountUsingDataProvider(String fName,String lName,String emailId,String pass) {
         CreateAccountPage accountpage = new CreateAccountPage();
         accountpage.createAccountwithParam(fName, lName, emailId, pass);
+
         Assert.assertTrue(isElementVisible(accountpage.registeruservalidation));
     }
     
@@ -98,6 +98,7 @@ public class TestApp extends BasePage {
     public void testSearchItemDataProvider(String item) {
         ItemSearchPage page = new ItemSearchPage();
         page.searchItem(item);
+
         }
     
     
@@ -149,7 +150,7 @@ public class TestApp extends BasePage {
        String name = "Abdullah Noor";
        String email = "Helloworld12345@yahoo.com";
        String phoneNumber = "1234567890";
-       String whatOnYourMindComment = "Sami is the best teacher";
+       String whatOnYourMindComment = "Hello, World";
        page.doContactUs(name, email, phoneNumber, whatOnYourMindComment);
        Assert.assertTrue(isElementVisible(page.thankYouForContactMessage));
 
